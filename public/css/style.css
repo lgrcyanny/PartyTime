@@ -1,0 +1,17 @@
+body {
+  padding-top: 70px;
+}
+#home-section {
+  display: block;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#signin-section,
+#signup-section {
+  margin-top: 90px;
+  display: block;
+  width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+}

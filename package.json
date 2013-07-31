@@ -1,0 +1,60 @@
+{
+  "name": "PartyTime",
+  "description": "PartyTime is a collaborative tool for party plan. It can help users agree on the party date, location etc more conveniently",
+  "keywords": [
+    "party",
+    "time"
+  ],
+  "version": "0.0.1",
+  "contributors": [
+    {
+      "name": "Cyanny Liang",
+      "email": "lgrcyanny@gmail.com"
+    },
+    {
+      "name": "Thomas Zhang",
+      "email": "wwzyhao@gmail.com"
+    }
+  ],
+  "private": false,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "scripts": {
+    "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --reporter spec test/test-*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lgrcyanny/PartyTime.git"
+  },
+  "dependencies": {
+    "express": "latest",
+    "ejs": "latest",
+    "mongoose": "latest",
+    "connect-mongo": "latest",
+    "connect-flash": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "passport-facebook": "latest",
+    "passport-twitter": "latest",
+    "passport-github": "latest",
+    "passport-google-oauth": "latest",
+    "imager": "latest",
+    "notifier": "latest",
+    "underscore": "latest",
+    "gzippo": "latest",
+    "async": "latest",
+    "view-helpers": "latest",
+    "forever": "latest",
+    "less-middleware": "~0.1.12",
+    "ejs-locals": "latest"
+  },
+  "devDependencies": {
+    "supertest": "latest",
+    "should": "latest",
+    "mocha": "latest",
+    "nodemon": "latest"
+  }
+}

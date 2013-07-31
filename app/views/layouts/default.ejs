@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Setting for responsive layout -->
+    <meta http-equiv="X-UA-Compatible" content="IE-edge, chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="HandheldFriendly" content="true">
+    <title><%=pkg.name %></title>
+    <meta name="description" content="<%=pkg.description %>" />
+    <meta name="author" content="Party Time Team" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <%-stylesheets %>
+  </head>
+  <body>
+    <div>
+      <header>
+        <nav class="navbar navbar-fixed-top">
+          <div class="container" style="width: auto;">
+            <a class="navbar-brand" href="/">Party Time</a>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+            </ul>
+            <% if (req.isAuthenticated()) { %>
+            <p class="pull-right navbar-text">Welcome
+              <a class="navbar-link" href="/users/<%=req.user.id %>"><%=req.user.username %></a>
+            </p>
+            <% } %>
+          </div>
+        </nav>
+      </header>
+      <section class="container">
+        <%-body %>
+      </section>
+      <footer>
+
+      </footer>
+    </div>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <%-scripts %>
+  </body>
+</html>
