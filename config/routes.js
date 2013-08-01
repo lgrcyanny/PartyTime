@@ -12,8 +12,7 @@ var async = require('async');
 var users = require('../app/controllers/users');
 //var articles = require('../app/controllers/articles')
 var auth = require('./middlewares/authorization');
-var home = require('../app/controllers/home');
-
+var parties = require('../app/controllers/parties');
 
 /**
  * Route middlewares
@@ -27,20 +26,19 @@ var home = require('../app/controllers/home');
 
 module.exports = function (app, passport) {
 
-  app.get('/', home.index);
+  // Users routes
   app.get('/signin', users.signin)
   app.get('/signup', users.signup)
-  // user routes
-  // app.get('/login', users.login)
-  // app.get('/signup', users.signup)
   app.get('/logout', users.logout)
   app.post('/users', users.create)
   app.post('/users/session',
     passport.authenticate('local', {
-      failureRedirect: '/login',
+      failureRedirect: '/signin',
       failureFlash: 'Invalid email or password.'
     }), users.session)
-  // app.get('/users/:userId', users.show)
+
+  // Parties routes
+  app.get('/', auth.requiresLogin, parties.index);
 
   // app.param('userId', users.user);
 

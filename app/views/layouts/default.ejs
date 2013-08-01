@@ -30,6 +30,7 @@
             <% if (req.isAuthenticated()) { %>
             <p class="pull-right navbar-text">Welcome
               <a class="navbar-link" href="/users/<%=req.user.id %>"><%=req.user.username %></a>
+              <a class="navbar-link" href="/logout">logout</a>
             </p>
             <% } %>
           </div>

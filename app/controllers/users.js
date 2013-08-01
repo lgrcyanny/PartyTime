@@ -41,8 +41,7 @@ exports.session = login;
  */
 exports.signup = function (req, res) {
   res.render('users/signup', {
-    title: 'Sign up',
-    user: new User()
+    title: 'Sign up to party time'
   });
 }
 
