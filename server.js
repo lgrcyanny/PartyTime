@@ -26,7 +26,7 @@ var mongoose = require('mongoose');
 
 
 // Bootstrap db connection
-mongoose.connect(config.db)
+mongoose.connect(config.db);
 
 // Bootstrap models
 var models_path = __dirname + '/app/models';
@@ -45,10 +45,10 @@ require('./config/express')(app, config, passport);
 require('./config/routes')(app, passport);
 
 // Start the app by listening on <port>
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 3000;
 app.listen(port);
 
-console.log('Express app started on port '+port)
+console.log('Express app started on port ' + port);
 
 // expose app
 module.exports = app;

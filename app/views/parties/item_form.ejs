@@ -1,0 +1,44 @@
+<div id="party-form-section">
+  <form class="form-horizontal" method="post" action="<%=action %>">
+    <input type="hidden" name="_csrf" value="<%=csrf_token %>"/>
+    <div class="form-group">
+      <label for="inputPartyName" class="col-lg-2 control-label">Party Name</label>
+      <div class="col-lg-10">
+        <input type="text" required="required" class="form-control" id="inputPartyName" name="partyName" placeholder="Party Name" value="<%=party.partyName %>" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputStartDateTime" class="col-lg-2 control-label">Start Date/Time</label>
+      <div class="col-lg-10">
+        <input type="text" required="required" class="form-control" id="inputStartDateTime" name="startDateTime" placeholder="<%=moment().format("YYYY-MM-DD HH:mm") %>" value="<%=party.startDateTime%>" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEndDateTime" class="col-lg-2 control-label">End Date/Time</label>
+      <div class="col-lg-10">
+        <input type="text" required="required" class="form-control" id="inputEndDateTime" name="endDateTime" placeholder="<%=moment().format("YYYY-MM-DD HH:mm") %>" value="<%=party.endDateTime %>" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputLocation" class="col-lg-2 control-label">Location</label>
+      <div class="col-lg-10">
+        <input type="text" required="required" class="form-control" id="inputLocation" name="location" placeholder="Party Location" value="<%=party.location %>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputDescription" class="col-lg-2 control-label">Description</label>
+      <div class="col-lg-10">
+        <textarea class="form-control" rows="3" name="description" id="inputDescription" placeholder="Party Description" value="<%=party.description %>"></textarea>
+        <% if (errors) { %>
+          <ul>
+            <% for (var error in errors) { %>
+              <li><%=error %></li>
+            <% } %>
+          </ul>
+        <% } %>
+        <button type="reset" class="btn">Reset</button>
+        <button type="submit" class="btn btn-warning">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -30,7 +30,6 @@
     "url": "https://github.com/lgrcyanny/PartyTime.git"
   },
   "dependencies": {
-    "express": "latest",
     "ejs": "latest",
     "mongoose": "latest",
     "connect-mongo": "latest",
@@ -49,7 +48,9 @@
     "view-helpers": "latest",
     "forever": "latest",
     "less-middleware": "~0.1.12",
-    "ejs-locals": "latest"
+    "ejs-locals": "latest",
+    "moment": "latest",
+    "express": "latest"
   },
   "devDependencies": {
     "supertest": "latest",

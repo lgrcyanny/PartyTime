@@ -3,11 +3,11 @@
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-  , Schema = mongoose.Schema
-  , crypto = require('crypto')
-  , _ = require('underscore')
-  , authTypes = ['github', 'twitter', 'facebook', 'google']
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var crypto = require('crypto');
+var _ = require('underscore');
+var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 /**
  * User Schema
@@ -141,7 +141,7 @@ UserSchema.methods = {
     if (!password) return ''
     var encrypred
     try {
-      encrypred = crypto.createHmac('sha1', this.salt).update(password).digest('hex')
+      encrypred = crypto.createHmac('sha1', this.salt).update(password).digest('hex');
       return encrypred
     } catch (err) {
       return ''

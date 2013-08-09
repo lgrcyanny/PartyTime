@@ -3,17 +3,17 @@
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-  , User = mongoose.model('User')
-  , utils = require('../../lib/utils')
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var utils = require('../../lib/utils');
 
 var login = function (req, res) {
   if (req.session.returnTo) {
-    res.redirect(req.session.returnTo)
-    delete req.session.returnTo
-    return
+    res.redirect(req.session.returnTo);
+    delete req.session.returnTo;
+    return;
   }
-  res.redirect('/')
+  res.redirect('/');
 }
 
 exports.signin = function (req, res) {
@@ -59,8 +59,8 @@ exports.logout = function (req, res) {
  */
 
 exports.create = function (req, res) {
-  var user = new User(req.body)
-  user.provider = 'local'
+  var user = new User(req.body);
+  user.provider = 'local';
   user.save(function (err) {
     if (err) {
       return res.render('users/signup', {
