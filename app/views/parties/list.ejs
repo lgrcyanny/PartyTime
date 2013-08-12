@@ -1,28 +1,32 @@
 <% layout('../layouts/default') -%>
+<% script('../js/party.js') -%>
 <div class="button-section">
   <h3>Still have no party yet?</h3>
   <a href="/parties/new" class="btn btn-warning">Create Party</a>
 </div>
 <div>
   <% if (parties.length) { %>
-    <table class="table table-striped">
+    <table class="table table-striped" id="pt-list">
       <thead>
         <tr>
-          <th>#</th>
           <th>Party Name</th>
           <th>Location</th>
           <th>Start</th>
           <th>End</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <% for (var i = 0; i < parties.length; i++) { %>
           <tr>
-            <td><%=i + 1 %></td>
             <td><a href="/parties/<%=parties[i]._id %>"><%=parties[i].partyName %></a></td>
             <td><%=parties[i].location %></td>
             <td><%=parties[i].startDateTime %></td>
             <td><%=parties[i].endDateTime %></td>
+            <td>
+              <a href="/parties/<%=parties[i]._id %>/edit" title="edit"><i class="icon-pencil"></i></a>
+              <a href="" title="delete"><i data-url="/parties/<%=parties[i]._id %>" data-csrf="<%=csrf_token %>" class="icon-remove"></i></a>
+            </td>
           </tr>
         <% } %>
       </tbody>

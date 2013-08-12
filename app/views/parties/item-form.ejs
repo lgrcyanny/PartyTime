@@ -28,7 +28,7 @@
     <div class="form-group">
       <label for="inputDescription" class="col-lg-2 control-label">Description</label>
       <div class="col-lg-10">
-        <textarea class="form-control" rows="3" name="description" id="inputDescription" placeholder="Party Description" value="<%=party.description %>"></textarea>
+        <textarea class="form-control" rows="3" name="description" id="inputDescription" placeholder="Party Description"><%=party.description %></textarea>
         <% if (errors) { %>
           <ul>
             <% for (var error in errors) { %>

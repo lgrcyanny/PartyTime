@@ -1,0 +1,20 @@
+<% layout('../layouts/fullwidth') -%>
+<div class="row" id="party-item-section">
+  <aside class="col-lg-3" id="pt-info">
+    <div id="pt-info-body" class="info-block well">
+      <h3><%=party.partyName %></h3>
+      <p><strong>Host: </strong><%=party.host.fullname ? party.host.fullname : party.host.username %></p>
+      <p><strong>Location: </strong><%=party.location %></p>
+      <p><strong>Start: </strong><%=party.startDateTime %></p>
+      <p><strong>End: </strong><%=party.endDateTime %></p>
+      <p><strong>Description: </strong><%=party.description %></p>
+      <p><strong>Invitees: </strong><%=invitees %></p>
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning" id="decision-btn">Make Decision</button>
+        <button type="button" class="btn btn-info" id="invite-btn">Invite Friends</button>
+      </div>
+    </div>
+  </aside>
+  <section class="well col-lg-6" id="pt-discuss"></section>
+  <aside class="well col-lg-3" id="pt-statistics"></aside>
+</div>

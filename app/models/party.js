@@ -17,10 +17,7 @@ var PartySchema = new Schema({
   location: {type:String, default: ''},
   description: {type: String, default: ''},
   activeStatus: {type:Boolean, default: true},
-  finalDecision: {
-    startDateTime: {type: Date, get: utils.formatDate},
-    endDateTime: {type: Date, get: utils.formatDate}
-  },
+  finalDecided: {type:Boolean, default: false},
   createdAt: {type: Date, default: Date.now, get: utils.formatDate},
   invitees: [{type: Schema.ObjectId, ref: 'User'}]
 });
@@ -57,7 +54,7 @@ PartySchema.statics = {
   load: function (partyId, callback) {
     this.findById(partyId)
       .populate('host')
-      .populate('invitees', '_id name email username')
+      .populate('invitees', '_id fullname email username')
       .exec(callback);
   },
 
@@ -67,7 +64,7 @@ PartySchema.statics = {
       .exec(callback);
   },
 
-  delete: function (partyId, callback) {
+  deleteById: function (partyId, callback) {
     this.findByIdAndRemove(partyId, callback);
   },
 
