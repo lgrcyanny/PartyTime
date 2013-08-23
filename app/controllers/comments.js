@@ -3,20 +3,47 @@
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var Comment = mongoose.model('Comment');
+var _ = require('underscore');
+var utils = require('../../lib/utils');
 
 /**
  * Create comment
  */
-
 exports.create = function (req, res) {
-  var article = req.article
-  var user = req.user
+  var comment = new Comment(req.body);
+  comment.party = req.party;
+  comment.user = req.user;
+  comment.save(function (err, newComment) {
+    if (err) {
+      res.send({
+        success: false,
+        errors: utils.errors(err.errors || err)
+      });
+      return;
+    }
+    res.send({
+      success: true,
+      username: req.user.username,
+      note: newComment
+    });
+  });
+};
 
-  if (!req.body.body) return res.redirect('/articles/'+ article.id)
-
-  article.addComment(user, req.body, function (err) {
-    if (err) return res.render('500')
-    res.redirect('/articles/'+ article.id)
-  })
-}
+exports.list = function (req, res) {
+  var partyId = req.params.partyId;
+  Comment.findComments(partyId, function (err, comments) {
+    if (err) {
+      res.send({
+        success: false,
+        errors: utils.errors(err.errors || err)
+      });
+      return;
+    }
+    res.send({
+      success: true,
+      comments: comments
+    });
+  });
+};

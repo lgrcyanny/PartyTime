@@ -1,20 +1,34 @@
 <% layout('../layouts/fullwidth') -%>
-<div class="row" id="party-item-section">
+<%- include invitees-form.ejs %>
+<%- include note-form.ejs %>
+<div class="row" id="pt-item-section">
   <aside class="col-lg-3" id="pt-info">
-    <div id="pt-info-body" class="info-block well">
-      <h3><%=party.partyName %></h3>
-      <p><strong>Host: </strong><%=party.host.fullname ? party.host.fullname : party.host.username %></p>
-      <p><strong>Location: </strong><%=party.location %></p>
-      <p><strong>Start: </strong><%=party.startDateTime %></p>
-      <p><strong>End: </strong><%=party.endDateTime %></p>
-      <p><strong>Description: </strong><%=party.description %></p>
-      <p><strong>Invitees: </strong><%=invitees %></p>
-      <div class="btn-group">
-        <button type="button" class="btn btn-warning" id="decision-btn">Make Decision</button>
-        <button type="button" class="btn btn-info" id="invite-btn">Invite Friends</button>
+    <div id="pt-info-body" class="info-block panel" data-pt-id="<%=party.id %>">
+      <input type="hidden" name="_csrf" value="<%=csrf_token %>" id="csrf-token" />
+      <div class="panel-heading"><%=party.partyName %></div>
+      <div class="panel-body">
+        <p><strong>Host: </strong><%=party.host.username %></p>
+        <p><strong>Location: </strong><%=party.location %></p>
+        <p><strong>Start: </strong><%=party.startDateTime %></p>
+        <p><strong>End: </strong><%=party.endDateTime %></p>
+        <p><strong>Description: </strong><%=party.description %></p>
+        <p><strong>Invitees: </strong><%=invitees %></p>
+        <div class="btn-group">
+          <button type="button" class="btn btn-warning" id="decision-btn">Make Decision</button>
+          <a type="button" class="btn btn-info" id="add-invitees-btn" data-toggle="modal" href="#invitees-modal">Invite Friends</a>
+        </div>
       </div>
     </div>
   </aside>
-  <section class="well col-lg-6" id="pt-discuss"></section>
+  <section class="col-lg-6" id="pt-discuss">
+    <div id="pt-notes">
+      <div>
+        <a type="button" class="btn btn-info" id="add-note-btn" data-toggle="modal" href="#note-modal">Add Note</a>
+      </div>
+    </div>
+    <div id="pt-comments">
+
+    </div>
+  </section>
   <aside class="well col-lg-3" id="pt-statistics"></aside>
 </div>

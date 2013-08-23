@@ -12,9 +12,9 @@ var getInvitees = function (invitees) {
   var res = '';
   for (var i = 0; i < invitees.length; i++) {
     if (i !== invitees.length - 1) {
-      res += invitees[i].fullname + ', ';
+      res += invitees[i].username + ', ';
     } else {
-      res += invitees[i].fullname;
+      res += invitees[i].username;
     }
   }
   return res;
@@ -24,12 +24,12 @@ exports.index = function (req, res) {
   //console.log(req.user.hashed_password);
   Party.list(req.user._id, function(err, parties) {
     if (err) {
-
+      return ;//render 404
     }
     res.render('parties/list', {
       parties: parties
     });
-  })
+  });
 };
 
 exports.loadPartyToRequest = function (req, res, next, id) {
@@ -115,14 +115,67 @@ exports.ajaxDeleteItem = function (req, res) {
 
 exports.renderPartyItem = function (req, res) {
   var party = req.party;
-  res.render('parties/item', {
-    title: party.partyName,
-    party: party,
-    invitees: party.invitees.length ? getInvitees(party.invitees) : 'No invitees yet.'
+  party.getInvitees(function (err) {
+    if (err) {
+      return; // render 404
+    }
+    res.render('parties/item', {
+      title: party.partyName,
+      party: party,
+      invitees: party.invitees.length ? getInvitees(party.invitees) : 'No invitees yet.'
+    });
   });
 };
 
+exports.ajaxAddInvitee = function (req, res) {
+  var party = req.party;
+  var inviteeId = req.body.inviteeId;
+  party.addInvitee(inviteeId, function (err) {
+    if (err) {
+      res.send({
+        success: false,
+        err: utils.errors(err.errors || err)
+      });
+      return;
+    }
+    res.send({
+      success: true,
+      party: party
+    });
+  });
+};
 
+exports.ajaxBulkAddInvitees = function (req, res) {
+  var party = req.party;
+  var invitees = req.body.invitees;
+  party.bulkAddInvitees(invitees, function (error) {
+    if (error) {
+      res.send({
+        success: false,
+        errors: utils.errors(error.errors || error)
+      });
+      return;
+    }
+    res.send({
+      success: true,
+      party: party
+    });
+  });
+};
 
-
-
+exports.ajaxRemoveInvitee = function (req, res) {
+  var party = req.party;
+  var inviteeId = req.body.inviteeId;
+   party.removeInvitee(inviteeId, function (err) {
+    if (err) {
+      res.send({
+        success: false
+      })
+      return;
+    }
+    res.send({
+      success: true,
+      party: party
+    });
+  });
+}

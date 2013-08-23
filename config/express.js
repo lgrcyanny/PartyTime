@@ -32,6 +32,7 @@ module.exports = function (app, config, passport) {
     }));
 
     app.use(express.static(config.root + '/public'));
+    app.use(express.static(config.root + '/app/views'));
 
     // don't use logger for test env
     if (process.env.NODE_ENV !== 'test') {
@@ -78,7 +79,7 @@ module.exports = function (app, config, passport) {
 
     // adds CSRF support
     if (process.env.NODE_ENV !== 'test') {
-      app.use(express.csrf());
+      //app.use(express.csrf());
     }
 
     // This could be moved to view-helpers :-)

@@ -1,0 +1,42 @@
+<!-- Modal -->
+<div class="modal fade" id="note-modal" tabindex="-1" role="dialog" aria-labelledby="note-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create Note</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method="post">
+          <div class="form-group">
+            <label for="inputStartDateTime" class="col-lg-2 control-label">Start Date/Time</label>
+            <div class="col-lg-10">
+              <input type="text" required="required" class="form-control" id="inputStartDateTime" name="startDateTime" placeholder="2013-08-12 16:00" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEndDateTime" class="col-lg-2 control-label">End Date/Time</label>
+            <div class="col-lg-10">
+              <input type="text" required="required" class="form-control" id="inputEndDateTime" name="endDateTime" placeholder="2013-08-12 17:00" value="" />
+              <button class="btn btn-info" id="add-available-dates-btn" style="margin-top: 10px">Add available dates</button>
+              <div id="available-dates">
+                <ul>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputMessage" class="col-lg-2 control-label">Message</label>
+            <div class="col-lg-10">
+               <textarea class="form-control" rows="3" name="description" id="inputMessage" placeholder="Leave your message here"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

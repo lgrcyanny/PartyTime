@@ -102,5 +102,28 @@ exports.user = function (req, res, next, id) {
       if (!user) return next(new Error('Failed to load User ' + id))
       req.profile = user
       next()
-    })
+    });
+};
+
+/**
+ * Find users by search name
+ */
+exports.ajaxFindUsers = function (req, res) {
+  User.findUsers(req.query.name, function (err, users) {
+    if (err) {
+      res.send({
+        success: false,
+        errors: utils.errors(err.errors || err)
+      });
+      return;
+    }
+    res.send({
+      success: true,
+      users: users
+    });
+  });
 }
+
+
+
+

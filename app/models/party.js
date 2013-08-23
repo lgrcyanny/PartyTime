@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
 var _ = require('underscore');
 var utils = require('../../lib/utils');
 
@@ -28,9 +29,30 @@ PartySchema.path('partyName').validate(function (partyName) {
 
 
 PartySchema.methods = {
-  addInvitee: function (user, callback) {
-    this.invitees.push(user._id);
+  isPartyOwner: function (userId) {
+    return this.host._id.equals(userId);
+  },
+
+  addInvitee: function (inviteeId, callback) {
+    this.invitees.push(inviteeId);
     this.save(callback);
+  },
+
+  /**
+   * Bulk Add invitees
+   * @param  {Array}   invitees [description]
+   * @param  {Function} callback [description]
+   */
+  bulkAddInvitees: function (invitees, callback) {
+    if (_.isArray(invitees)) {
+      for (var i = 0; i < invitees.length; i++) {
+        this.invitees.pull(invitees[i]);
+        this.invitees.push(invitees[i]);
+      }
+      this.save(callback);
+    } else {
+      callback(new Error('Argument error, invitees is ' + (typeof invitees) + ' not array'));
+    }
   },
 
   removeInvitee: function (inviteeId, callback) {
@@ -38,9 +60,15 @@ PartySchema.methods = {
     this.save(callback);
   },
 
+  getInvitees: function (callback) {
+    this.populate({
+      path: 'invitees',
+      select: '_id username'
+    }, callback);
+  },
+
   addFinalDecision: function (finalDate, callback) {
-    this.finalDecision = _.clone(finalDate);
-    this.save(callback);
+
   }
 };
 
@@ -53,8 +81,7 @@ PartySchema.statics = {
    */
   load: function (partyId, callback) {
     this.findById(partyId)
-      .populate('host')
-      .populate('invitees', '_id fullname email username')
+      .populate('host', '_id username')
       .exec(callback);
   },
 

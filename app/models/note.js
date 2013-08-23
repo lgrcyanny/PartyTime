@@ -9,26 +9,34 @@ var utils = require('../../lib/utils');
 /**
  * Party Schema
  */
-var CommentSchema = new Schema({
+var NoteSchema = new Schema({
   party: {type: Schema.ObjectId, ref: 'Party'},
-  content: {type: String, default: '' },
-  user: { type: Schema.ObjectId, ref: 'User' },
+  user: {type: Schema.ObjectId, ref: 'User'},
+  availableDates: [{
+    startDateTime: {type: Date, get: utils.formatDate},
+    endDateTime: {type: Date, get: utils.formatDate}
+  }],
+  message: {type: String, default: ''},
   createdAt: {type: Date, default: Date.now, get: utils.formatDate}
 });
 
-CommentSchema.statics = {
-  findComments: function(partyId, callback) {
+NoteSchema.methods = {
+
+};
+
+NoteSchema.statics = {
+  findNotes: function(partyId, callback) {
     this.find({party: partyId})
       .populate('user', '_id username')
       .sort({'createdAt': -1})
       .exec(callback);
   },
-  update: function (commentId, data, callback) {
+  update: function (noteId, data, callback) {
     this.findByIdAndUpdate(noteId, data, callback);
   },
-  remove: function (commentId, callback) {
+  remove: function (noteId, callback) {
     this.findByIdAndRemove(noteId, callback);
   }
 };
 
-mongoose.model('Comment', CommentSchema);
+mongoose.model('Note', NoteSchema);

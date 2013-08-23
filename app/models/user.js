@@ -149,4 +149,19 @@ UserSchema.methods = {
   }
 }
 
+UserSchema.statics = {
+  /**
+   * Find User by name, search username, fullname
+   * @param  {String}   name     search text
+   * @param  {Function} callback
+   */
+  findUsers: function (name, callback) {
+    var searchText = new RegExp(name, 'gi');
+    console.log(searchText);
+    this.find({}, '_id username fullname')
+      .or([{fullname: searchText}, {username: searchText}])
+      .exec(callback);
+  }
+}
+
 mongoose.model('User', UserSchema)

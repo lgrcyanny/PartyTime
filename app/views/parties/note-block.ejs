@@ -1,0 +1,14 @@
+<div class="pt-note-block panel panel-default" id="<%=note.id %>">
+  <div class="panel-heading"><%=username %></div>
+  <div class="panel-body">
+    <p><strong>Available dates:</strong></p>
+    <ul>
+      <% for (var i = 0; i < note.availableDates.length; i++) { %>
+        <li><%=note.availableDates[i].startDateTime %> ~ <%=note.availableDates[i].endDateTime %></li>
+      <% } %>
+    </ul>
+    <p><strong>Message:</strong></p>
+    <p><%=note.message %></p>
+    <p>Created at: <%=note.createdAt %></p>
+  </div>
+</div>
